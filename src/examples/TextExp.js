@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Text } from '../components';
+import { Fieldset, Form, Text } from '../components';
 
 class TextExp extends Component {
   constructor(props) {
@@ -26,6 +26,9 @@ class TextExp extends Component {
         onSubmit={this.onSubmit}
         value={this.state.value}
       >
+        <Fieldset name="neska">
+          <Text name="oso_polita" />
+        </Fieldset>
         <Text name="pepito" />
         <button type="submit">Submit</button>
       </Form>

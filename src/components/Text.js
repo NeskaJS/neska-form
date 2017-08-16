@@ -7,7 +7,7 @@ class Text extends Component {
   };
 
   static contextTypes = {
-    change: PropTypes.func,
+    onChange: PropTypes.func,
     value: PropTypes.objectOf(
       PropTypes.oneOfType([
         PropTypes.array,
@@ -19,8 +19,8 @@ class Text extends Component {
     ),
   };
 
-  handleChange = event => {
-    this.context.change(this.props.name, event.target.value);
+  onChange = event => {
+    this.context.onChange(this.props.name, event.target.value);
   };
 
   render() {
@@ -31,7 +31,7 @@ class Text extends Component {
       <input
         name={name}
         type="text"
-        onChange={this.handleChange}
+        onChange={this.onChange}
         value={value[name] || ''}
       />
     );

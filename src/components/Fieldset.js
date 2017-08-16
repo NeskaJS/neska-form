@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Form extends Component {
+class Fieldset extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,
     ]),
+    name: PropTypes.string.isRequired,
+  };
+
+  static contextTypes = {
     onChange: PropTypes.func,
-    onSubmit: PropTypes.func,
     value: PropTypes.objectOf(
       PropTypes.oneOfType([
         PropTypes.array,
@@ -18,12 +21,6 @@ class Form extends Component {
         PropTypes.string,
       ]),
     ),
-  };
-
-  static defaultProps = {
-    onChange() {},
-    onSubmit() {},
-    value: {},
   };
 
   static childContextTypes = {
@@ -42,26 +39,23 @@ class Form extends Component {
   getChildContext() {
     return {
       onChange: this.onChange,
-      value: this.props.value,
+      value: this.context.value[this.props.name] || {},
     };
   }
 
-  onChange = (name, value) => {
-    this.props.onChange(name, value);
-  };
-
-  onSumbit = event => {
-    event.preventDefault();
-    this.props.onSubmit();
+  onChange = (field, newValue) => {
+    const value = { ...this.context.value[name], [field]: newValue };
+    this.context.onChange(this.props.name, value);
   };
 
   render() {
+    const { children, name } = this.props;
     return (
-      <form onSubmit={this.onSumbit}>
-        {this.props.children}
-      </form>
+      <fieldset name={name}>
+        {children}
+      </fieldset>
     );
   }
 }
 
-export default Form;
+export default Fieldset;
