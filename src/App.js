@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import TextExp from './examples/TextExp'
+import React from 'react';
+import TextExp from './examples/TextExp';
 
-class App extends Component {
-  render() {
-    return (
-      <TextExp />
-    );
-  }
-}
+const App = () => (
+  <TextExp />
+);
 
 export default App;
