@@ -1,7 +1,2 @@
-import Form from './Form';
-import Text from './Text';
-
-export {
-  Form,
-  Text,
-};
+export { default as Form } from './Form';
+export { default as Text } from './Text';

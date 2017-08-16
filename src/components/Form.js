@@ -7,10 +7,17 @@ class Form extends Component {
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,
     ]),
-    className: PropTypes.string,
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
-    value: PropTypes.object,
+    value: PropTypes.objectOf(
+      PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.bool,
+        PropTypes.number,
+        PropTypes.object,
+        PropTypes.string,
+      ]),
+    ),
   };
 
   static defaultProps = {
@@ -32,10 +39,8 @@ class Form extends Component {
     ),
   };
 
-  change = (name, after, before) => {
-    if (after !== before) {
-      this.props.onChange(name, after, before);
-    }
+  change = (name, value) => {
+    this.props.onChange(name, value);
   };
 
   getChildContext() {
@@ -45,8 +50,9 @@ class Form extends Component {
     };
   }
 
-  handleSubmit = () => {
-    console.log('handleSubmit');
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit();
   };
 
   render() {

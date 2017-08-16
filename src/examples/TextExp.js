@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Text } from '../components'
+import { Form, Text } from '../components';
 
-export class TextExp extends Component {
+class TextExp extends Component {
   constructor(props) {
     super(props);
 
@@ -10,12 +10,13 @@ export class TextExp extends Component {
     };
   }
 
-  onChange = (name, value) => {
-    this.setState({ value: { ...this.state.value, [name]: value }})
+  onChange = (name, newValue) => {
+    const value = { ...this.state.value, [name]: newValue };
+    this.setState({ value }, () => console.log('onChange', this.state.value));
   };
 
   onSubmit = () => {
-    console.log('onSubmit');
+    console.log('onSubmit', this.state.value);
   };
 
   render() {
@@ -26,6 +27,7 @@ export class TextExp extends Component {
         value={this.state.value}
       >
         <Text name="pepito" />
+        <button type="submit">Submit</button>
       </Form>
     );
   }
